@@ -1,7 +1,12 @@
 {
     "compilerOptions": {
         "target": "ESNext",
-        "lib": ["DOM", "DOM.Iterable", "ESNext"],
+        "useDefineForClassFields": true,
+        "lib": [
+            "DOM",
+            "DOM.Iterable",
+            "ESNext"
+        ],
         "allowJs": false,
         "skipLibCheck": true,
         "esModuleInterop": false,
@@ -13,7 +18,15 @@
         "resolveJsonModule": true,
         "isolatedModules": true,
         "noEmit": true,
-        "jsx": "react"
+        "jsx": "react-jsx",
+        "baseUrl": ".",
+        "paths": {
+            "@/*": [
+                "src/*"
+            ]
+        }
     },
-    "include": ["./src"]
+    "include": [
+        "./src"
+    ]
 }

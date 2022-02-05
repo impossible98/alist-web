@@ -1,3 +1,5 @@
+import path from 'path';
+
 import reactRefresh from '@vitejs/plugin-react-refresh';
 import { defineConfig } from 'vite';
 import pluginRewriteAll from 'vite-plugin-rewrite-all';
@@ -10,5 +12,10 @@ export default defineConfig({
     },
     define: {
         'process.env': {},
+    },
+    resolve: {
+        alias: {
+            '@': path.resolve(__dirname, './src'),
+        },
     },
 });
