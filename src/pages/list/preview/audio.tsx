@@ -1,9 +1,10 @@
 import { Center, Heading, Icon, useColorModeValue } from '@chakra-ui/react';
+import Box from '@mui/material/Box';
+import * as musicMetadata from 'music-metadata-browser';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import ReactJkMusicPlayer, { ReactJkMusicPlayerAudioListProps } from 'react-jinke-music-player';
 import 'react-jinke-music-player/assets/index.css';
-import Box from '@mui/material/Box';
 
 import useFileUrl from '../../../hooks/useFileUrl';
 import getIcon from '../../../utils/icon';
@@ -20,6 +21,9 @@ function Audio({ file }: FileProps) {
         ReactJkMusicPlayerAudioListProps[]
     >([]);
     const fileUrl = useFileUrl();
+    // musicMetadata.parseBlob(fileUrl).then(metadata => {
+    //     console.log(metadata.format.duration);
+    // });
     const cover = getSetting('music cover')
         || 'https://store.heytapimage.com/cdo-portal/feedback/202110/30/d43c41c5d257c9bc36366e310374fb19.png';
     const singer = t('unknown');
@@ -63,14 +67,19 @@ function Audio({ file }: FileProps) {
             </Center>
             <ReactJkMusicPlayer
                 audioLists={audioLists}
-                theme={theme}
-                locale={i18n.language === 'zh' ? 'zh_CN' : 'en_US'}
-                mode='full'
                 autoPlay={getSetting('autoplay audio') === 'true'}
                 defaultPosition={{
                     left: 20,
                     bottom: 20,
                 }}
+                defaultVolume={0.7}
+                glassBg
+                locale={i18n.language === 'zh' ? 'zh_CN' : 'en_US'}
+                mode='full'
+                showDownload={false}
+                showMediaSession={true}
+                showThemeSwitch={false}
+                theme={theme}
             />
         </Box>
     );
