@@ -1,7 +1,5 @@
 import { Stack, useColorModeValue } from '@chakra-ui/react';
-import React from 'react';
-import { Github } from './github';
-import { HomeLink } from './home-link';
+import * as React from 'react';
 import { Language } from './language';
 import { ThemeToggle } from './theme-toggle';
 import { Unfold } from './unfold';
@@ -14,7 +12,7 @@ function inIframe() {
     }
 }
 
-export default function Ss(props: any) {
+function Ss(props: any) {
     return (
         !inIframe()
             ? (
@@ -33,10 +31,10 @@ export default function Ss(props: any) {
                     {props.list && <Unfold />}
                     <Language />
                     <ThemeToggle />
-                    {/* <Github /> */}
-                    <HomeLink />
                 </Stack>
             )
             : <></>
     );
 }
+
+export default Ss;

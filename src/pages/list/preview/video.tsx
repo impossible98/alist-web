@@ -53,7 +53,7 @@ const Video = ({ file }: FileProps) => {
             autoplay: getSetting('autoplay video') === 'true',
             autoSize: false,
             autoMini: true,
-            screenshot: !file.name.endsWith(".m3u8"),
+            screenshot: !file.name.endsWith('.m3u8'),
             hotkey: true,
             pip: true,
             mutex: true,

@@ -1,11 +1,13 @@
 import { Center, HStack, Link, Text, VStack } from '@chakra-ui/react';
-import React, { useContext } from 'react';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link as ReactLink } from 'react-router-dom';
-import { IContext } from '../context';
-const Footer = () => {
+
+function Footer() {
     const { t } = useTranslation();
-    const { getSetting } = useContext(IContext);
+
     return (
         <Center py='4' className='footer'>
             <VStack>
@@ -16,14 +18,17 @@ const Footer = () => {
                     <span>|</span>
                     <ReactLink to='/@manage'>{t('Manage')}</ReactLink>
                 </HStack>
-                {getSetting('site beian') && (
-                    <Link className='line1' isExternal href='https://beian.miit.gov.cn/'>
-                        {getSetting('site beian')}
-                    </Link>
-                )}
             </VStack>
         </Center>
+
+        // <Container maxWidth='sm'>
+        //     <Box sx={{ bgcolor: '#cfe8fc', height: '100vh' }}>
+        //         <Link isExternal href='https://github.com/Xhofe/alist'>
+        //             {t('Powered by {{project}}', { project: 'Alist' })}
+        //         </Link>
+        //     </Box>
+        // </Container>
     );
-};
+}
 
 export default Footer;
