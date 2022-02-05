@@ -1,8 +1,10 @@
-import { Box, Center, Heading, Icon, useColorModeValue } from '@chakra-ui/react';
-import React, { useContext, useEffect } from 'react';
+import { Center, Heading, Icon, useColorModeValue } from '@chakra-ui/react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import ReactJkMusicPlayer, { ReactJkMusicPlayerAudioListProps } from 'react-jinke-music-player';
 import 'react-jinke-music-player/assets/index.css';
+import Box from '@mui/material/Box';
+
 import useFileUrl from '../../../hooks/useFileUrl';
 import getIcon from '../../../utils/icon';
 import { FileProps, IContext } from '../context';
@@ -10,8 +12,8 @@ import { FileProps, IContext } from '../context';
 export const type = 4;
 export const exts = [];
 
-const Audio = ({ file }: FileProps) => {
-    const { lastFiles, getSetting } = useContext(IContext);
+function Audio({ file }: FileProps) {
+    const { lastFiles, getSetting } = React.useContext(IContext);
     const theme = useColorModeValue('light', 'dark');
     const { t, i18n } = useTranslation();
     const [audioLists, setAudioLists] = React.useState<
@@ -49,7 +51,7 @@ const Audio = ({ file }: FileProps) => {
         setAudioLists([audio, ...audioList]);
     }, []);
     return (
-        <Box className='audio-box' w='full'>
+        <Box>
             <Center p='8' w='full'>
                 <Heading display='inline-flex' alignItems='center'>
                     <Icon
@@ -72,6 +74,6 @@ const Audio = ({ file }: FileProps) => {
             />
         </Box>
     );
-};
+}
 
 export default Audio;
