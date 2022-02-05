@@ -1,5 +1,5 @@
-import mitt from 'mitt'
+import mitt from 'mitt';
 
-const bus = mitt()
+const bus = mitt();
 
 export default bus;
