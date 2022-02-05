@@ -45,31 +45,23 @@ const Video = ({ file }: FileProps) => {
     useEffect(() => {
         let options: any = {
             container: '#video-player',
-            title: file.name,
             url: url,
+            title: file.name,
+            // theme: '#000',
+            volume: 0.8,
+            muted: false,
             autoplay: getSetting('autoplay video') === 'true',
-            autoMini: true,
             autoSize: false,
-            playbackRate: true,
-            flip: true,
-            rotate: true,
-            aspectRatio: true,
+            autoMini: true,
+            screenshot: !file.name.endsWith(".m3u8"),
+            hotkey: true,
+            pip: true,
+            mutex: true,
             fullscreen: true,
             fullscreenWeb: true,
-            mutex: true,
-            light: true,
-            backdrop: true,
-            subtitleOffset: true,
             miniProgressBar: true,
-            localVideo: true,
-            localSubtitle: true,
+            whitelist: ['*'],
             lang: i18n.language === 'zh' ? 'zh-cn' : 'en',
-            setting: true,
-            pip: true,
-            // screenshot: !file.name.endsWith(".m3u8"),
-            // moreVideoAttr: {
-            //   crossOrigin: "anonymous",
-            // },
             customType: {
                 flv: function(video: HTMLMediaElement, url: string, art: Artplayer) {
                     const flvPlayer = flvjs.createPlayer(
@@ -188,24 +180,22 @@ const Video = ({ file }: FileProps) => {
                     ))}
                 </MenuList>
             </Menu>
-            <Box w='full' h='60vh' id='video-player'></Box>
-            <Center mt='2' w='full'>
+            <Box
+                w='full'
+                h='75vh'
+                id='video-player'
+            >
+            </Box>
+            <Center
+                mt='2'
+                w='full'
+            >
                 <HStack spacing='2'>
                     <Button
-                        colorScheme='telegram'
+                        colorScheme='orange'
                         as={chakra.a}
-                        href={`iina://weblink?url=${link}`}
+                        href={`vlc://${link}`}
                     >
-                        IINA
-                    </Button>
-                    <Button
-                        colorScheme='yellow'
-                        as={chakra.a}
-                        href={`potplayer://${link}`}
-                    >
-                        PotPlayer
-                    </Button>
-                    <Button colorScheme='orange' as={chakra.a} href={`vlc://${link}`}>
                         VLC
                     </Button>
                 </HStack>

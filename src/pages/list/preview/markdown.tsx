@@ -1,9 +1,8 @@
-import { useColorModeValue } from '@chakra-ui/color-mode';
-import { Box, Center } from '@chakra-ui/layout';
+import { Center } from '@chakra-ui/layout';
 import { Spinner } from '@chakra-ui/spinner';
+import Box from '@mui/material/Box';
 import axios from 'axios';
-import React, { useContext, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
+import * as React from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeRaw from 'rehype-raw';
@@ -11,17 +10,14 @@ import remarkGfm from 'remark-gfm';
 import useFileUrl from '../../../hooks/useFileUrl';
 import { FileProps, IContext } from '../context';
 import '../styles/github-markdown.css';
-// import jschardet from "jschardet";
 
 export const type = 5;
 export const exts = [];
 
-const Markdown = ({ file, readme }: FileProps) => {
-    const theme = useColorModeValue('light', 'dark');
+function Markdown({ file, readme }: FileProps) {
     const [content, setContent] = React.useState('');
-    const { getSetting } = useContext(IContext);
+    const { getSetting } = React.useContext(IContext);
     let link = useFileUrl(true)(file);
-    const { i18n } = useTranslation();
     const refresh = () => {
         if (readme) {
             if (file.type === -1) {
@@ -30,19 +26,11 @@ const Markdown = ({ file, readme }: FileProps) => {
         }
         axios
             .get(link, {
-                // transformResponse: [
-                //   (data) => {
-                //     return data;
-                //   },
-                // ],
                 responseType: 'blob',
             })
             .then(async (resp) => {
                 const blob = resp.data;
                 let res = await blob.text();
-                // const encoding = jschardet.detect(res).encoding;
-                // console.log(encoding);
-                // if (encoding === "windows-1252") {
                 if (res.includes('�')) {
                     const decoder = new TextDecoder('gbk');
                     res = decoder.decode(await blob.arrayBuffer());
@@ -56,7 +44,7 @@ const Markdown = ({ file, readme }: FileProps) => {
                 }
             });
     };
-    useEffect(() => {
+    React.useEffect(() => {
         refresh();
         return () => {
             setContent('');
@@ -83,6 +71,6 @@ const Markdown = ({ file, readme }: FileProps) => {
             </Center>
         );
     }
-};
+}
 
 export default Markdown;
