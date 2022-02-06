@@ -21,7 +21,6 @@ import { useTranslation } from 'react-i18next';
 import { IconType } from 'react-icons';
 import { BiExit } from 'react-icons/bi';
 import { BsGearFill } from 'react-icons/bs';
-import { DiGithubAlt } from 'react-icons/di';
 import { FiMenu } from 'react-icons/fi';
 import { MdCached, MdKeyboardArrowRight, MdStorage } from 'react-icons/md';
 import { SiMetabase } from 'react-icons/si';
@@ -86,7 +85,7 @@ const getAllNavItems = (items: NavItem[], acc: NavItem[] = []) => {
     return acc;
 };
 
-export default function Swibc() {
+function Swibc() {
     const disclosureSet = {} as any;
     for (const item of NavItems) {
         if (item.children) {
@@ -120,6 +119,7 @@ export default function Swibc() {
     const NavItem = (props: any) => {
         const { icon, children, ...rest } = props;
         const MyLink: any = props.to ? Link : Box;
+
         return (
             <MyLink
                 to={`${match.url}/${props.to}`}
@@ -282,14 +282,6 @@ export default function Swibc() {
                     <Box w='96' display={{ base: 'none', md: 'flex' }}></Box>
 
                     <Flex align='center'>
-                        <Clink href='https://github.com/Xhofe/alist' isExternal>
-                            <Icon
-                                boxSize={6}
-                                color='gray.500'
-                                as={DiGithubAlt}
-                                cursor='pointer'
-                            />
-                        </Clink>
                         <Tooltip
                             shouldWrapChildren
                             hasArrow
@@ -377,3 +369,5 @@ export default function Swibc() {
         </Box>
     );
 }
+
+export default Swibc
